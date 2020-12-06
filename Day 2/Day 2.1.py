@@ -31,8 +31,20 @@ for string in strings:
 	pass_dict = {}
 	pass_dict['password'] = password
 	pass_dict['letter'] = policy_letter
-	pass_dict['range_min'] = range_min
-	pass_dict['range_max'] = range_max
+	pass_dict['range_min'] = int(range_min)
+	pass_dict['range_max'] = int(range_max)
 	pass_list.append(pass_dict)
 
-print(pass_list)
+# count characters within each password to find
+# total number of valid passwords
+valid_count = 0
+for entry in pass_list:
+	password = entry['password']
+	letter = entry['letter']
+	count = password.count(letter)
+	range_min = entry['range_min']
+	range_max = entry['range_max']
+	if range_min <= count <= range_max:
+		valid_count += 1
+
+print(valid_count)
