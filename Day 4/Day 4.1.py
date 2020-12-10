@@ -15,3 +15,19 @@ for string in strings:
 		s.split(':')[0] : s.split(':')[1] for s in passport_str.split(' ')
 	}
 	passports.append(passport)
+
+# check required keys. Assumptions:
+# 	8=valid
+# 	7=valid if cid is the missing key
+# 	no passports will have more than 8 keys
+valid = 0
+for passport in passports:
+	length = len(passport)
+	if length <= 6:
+		continue
+	elif length == 7:
+		if 'cid' not in passport:
+			valid += 1
+	else:
+		valid += 1
+print(valid)
