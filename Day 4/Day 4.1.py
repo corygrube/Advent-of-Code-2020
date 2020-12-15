@@ -1,4 +1,3 @@
-import pprint
 # read values from data file
 file_path = 'Day 4/Data.txt'
 with open(file_path, 'r') as file:
