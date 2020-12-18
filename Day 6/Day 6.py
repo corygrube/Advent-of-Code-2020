@@ -16,3 +16,17 @@ for group in groups:
 	total += len(answers)
 
 print(total)
+
+# part 2
+# iterate through groups on place, calculate new total
+total = 0
+for group in groups:
+	# split group into list of people, iterate
+	people = group.splitlines()
+	# create list of sets (one per person)
+	sets = [set(person) for person in people]
+	# check intersection of sets 1+ with set 0 - add to total
+	answers = sets[0].intersection(*sets[1:])
+	total += len(answers)
+
+print(total)
