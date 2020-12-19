@@ -32,3 +32,30 @@ for line in lines:
 	
 	# insert rule into rules
 	rules[color] = rule
+
+# function to recursively search through bags
+# returns true if 'shiny gold' is found.
+def bag_search(color):
+	# arg check
+	if color not in rules:
+		return False
+	
+	# iterate through list of tuples (contained bags)
+	# return True on shiny gold
+	# recurse through any other colors. If gold found, return True
+	for bag in rules[color]:
+		if bag[1] == 'shiny gold':
+			return True
+		if bag_search(bag[1]):
+			return True
+	
+	return False
+
+# part 1
+# run bag_search for each rule in rules. 
+# Add 1 for each shiny gold found
+count = 0
+for color in rules:
+	if bag_search(color):
+		count += 1
+print(count)
