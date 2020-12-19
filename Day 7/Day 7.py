@@ -59,3 +59,34 @@ for color in rules:
 	if bag_search(color):
 		count += 1
 print(count)
+
+# function to recursively count bags held by other bags
+# each instance returns bags held within
+def bag_count(color, count=0):
+	# arg check
+	# colors not in rules contain no other bags - count is always 1
+	if color not in rules:
+		return 1
+	
+	# iterate through list of tuples (contained bags)
+	# recurse through colors.
+	for bag in rules[color]:
+		# temp var - recursively counts:
+		# 	contained bags * qty of source bag
+		temp = bag[0] * bag_count(bag[1])
+		# if temp == qty of current color,
+		# 	we know this bag contains no other bags. Add to count.
+		if temp == bag[0]:
+			count += temp
+		# else, temp represents bags WITHIN qty of current color. 
+		# 	Add temp + qty of current bag to count.
+		else:
+			count += temp + bag[0]
+	
+	# return current count up
+	return count
+
+# part 2
+# run bag_count for 'shiny gold' bags
+count = bag_count('shiny gold')
+print(count)
